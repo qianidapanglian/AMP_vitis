@@ -1,0 +1,24 @@
+.metadata
+IDE.log
+.analytics
+.xil
+.vscode
+# 硬件平台
+axi_lite4
+
+axi_DMA_circle2
+plfm* 
+
+RemoteSystemsTempFiles
+
+*.bit
+*.cproject
+*.prj
+*.sprj
+
+
+
+
+
+
+
