@@ -34,10 +34,10 @@ static void soft_intr_handler(void *CallbackRef);
  */
 static void cpu1_intr_init(INTC *IntcInstancePtr)
 {
-	XScuGic_Connect(IntcInstancePtr, SOFT_INTR_ID_TO_CPU0,
+	XScuGic_Connect(IntcInstancePtr, SOFT_INTR_ID_TO_CPU1,
 			(Xil_ExceptionHandler)soft_intr_handler, (void *)IntcInstancePtr);
 
-	XScuGic_Enable(IntcInstancePtr, SOFT_INTR_ID_TO_CPU0);
+	XScuGic_Enable(IntcInstancePtr, SOFT_INTR_ID_TO_CPU1);
 }
 
 /**
