@@ -110,6 +110,12 @@
  #define INTC_HANDLER	XScuGic_InterruptHandler
 #endif
 
+//软件中断
+#define CPU1_ID              XSCUGIC_SPI_CPU1_MASK        //CPU1 ID
+#define SOFT_INTR_ID_TO_CPU0 0                            //软件中断号 0 ,范围：0~15
+#define SOFT_INTR_ID_TO_CPU1 1                            //软件中断号 1 ,范围：0~15
+
+
 
 //串口宏定义
 #define UART_DEVICE_ID     XPAR_XUARTPS_0_DEVICE_ID
@@ -220,6 +226,8 @@ int user_dma_itr_init();
 // void user_dma_itr_disable();
 int tx_datainit(XAxiDma * AxiDmaInstPtr,Txdata_cfg* txdata_cfg);
 void user_tx_datainit();
+int user_itr_init();
+void user_softwareIntr(void);
 
 
 

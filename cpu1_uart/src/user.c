@@ -118,6 +118,6 @@ void test_xsct_print(void)
 	int test_local = 1;
 	// xil_printf("first con\r\n");
 
-	xil_printf("test_local = %d\r\n",test_local);
+	xil_printf("cpu1.test_local = %d\r\n",test_local);
 
 }

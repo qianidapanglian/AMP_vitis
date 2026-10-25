@@ -1003,6 +1003,40 @@ int BspUartInit(void)
 }
 
 
+//软件中断函数
+static void soft_intr_handler(void *CallbackRef)
+{
+	xil_printf("This is CPU0,Soft Interrupt from CPU1\r\n");
+	
+}
+
+
+
+/**
+ * 软件中断初始化（用于不同cpu间通信）
+ * 
+ */
+//CPU0中断初始化
+static void cpu0_intr_init(INTC * IntcInstancePtr)
+{
+	//初始化中断控制器
+	// XScuGic_Config *intc_cfg_ptr;
+	// intc_cfg_ptr = XScuGic_LookupConfig(INTC_DEVICE_ID);
+    // XScuGic_CfgInitialize(intc_ptr, intc_cfg_ptr,
+    // 		intc_cfg_ptr->CpuBaseAddress);
+    //设置并打开中断异常处理功能
+    // Xil_ExceptionRegisterHandler(XIL_EXCEPTION_ID_INT,
+    // 		(Xil_ExceptionHandler)XScuGic_InterruptHandler, intc_ptr);
+    // Xil_ExceptionEnable();
+
+    XScuGic_Connect(IntcInstancePtr, SOFT_INTR_ID_TO_CPU0,
+          (Xil_ExceptionHandler)soft_intr_handler, (void *)IntcInstancePtr);
+
+    XScuGic_Enable(IntcInstancePtr, SOFT_INTR_ID_TO_CPU0); //CPU0软件中断
+}
+
+
+
 /**
 *
 * @brief 配置中断控制器，需要手动设置每个DMA外设及UART的配置。
@@ -1066,6 +1100,7 @@ int user_itr_init()
     dma_intr_config(&Intc,&Dmaintr_cfg_0);
     dma_intr_config(&Intc,&Dmaintr_cfg_1);
 	uart_intr_config(&Intc);
+	cpu0_intr_init(&Intc);
 
 #endif
 
@@ -1077,6 +1112,16 @@ int user_itr_init()
 	Xil_ExceptionEnable();
 
 	// xil_printf("SetupIntrSystem_Success");
-	xil_printf("SetupIntrSystem_Success\r\n");
+	xil_printf("cpu0 SetupIntrSystem_Success\r\n");
 	return XST_SUCCESS;
 }
+
+
+/**
+ * 发送软中断给cpu1
+ */
+void user_softwareIntr(void)
+{
+	XScuGic_SoftwareIntr(&Intc,SOFT_INTR_ID_TO_CPU1,CPU1_ID);
+}
+

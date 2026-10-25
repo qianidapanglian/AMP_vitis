@@ -21,20 +21,23 @@
 #include "platform.h"
 #include "xil_printf.h"
 #include "sleep.h"
+
 #include "user.h"
+#include "user_intr.h"
 
 int main()
 {
     init_platform();
-
+    user_itr_init();
     
     print("Hello World\n\r");
     print("Successfully ran Hello World application");
     while(1)
     {
         usleep(1000000);
-        printf("cpu1\r\n");
-        test_xsct_print();
+        user_softwareIntr();
+        // printf("cpu1\r\n");
+        // test_xsct_print();
     }
     cleanup_platform();
     return 0;
