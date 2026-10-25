@@ -35,7 +35,7 @@ int main()
     while(1)
     {
         usleep(1000000);
-        user_softwareIntr();
+        // user_softwareIntr();
         // printf("cpu1\r\n");
         // test_xsct_print();
     }

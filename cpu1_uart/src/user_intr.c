@@ -84,7 +84,7 @@ void user_softwareIntr(void)
 }
 
 /**
- * 回调
+ * 中断回调函数
  */
 static void soft_intr_handler(void *CallbackRef)
 {

@@ -1122,6 +1122,6 @@ int user_itr_init()
  */
 void user_softwareIntr(void)
 {
-	XScuGic_SoftwareIntr(&Intc,SOFT_INTR_ID_TO_CPU1,CPU1_ID);
+	XScuGic_SoftwareIntr(&Intc,SOFT_INTR_ID_TO_CPU0,CPU0_ID);
 }
 

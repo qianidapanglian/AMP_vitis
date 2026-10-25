@@ -146,7 +146,7 @@ int main(void)
 	while(1) {
 		usleep(600000);
 		// test_int_4 += 1;
-		// user_softwareIntr();
+		user_softwareIntr();
 		// xil_printf("cpu0 = %d\r\n",test_int_4);
 		
 		if(uart_rx_ready)
