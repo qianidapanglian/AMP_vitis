@@ -144,9 +144,9 @@ int main(void)
 	 * 等待 TX 完成与 RX 完成
 	 */
 	while(1) {
-		usleep(600000);
+		// usleep(600000);
 		// test_int_4 += 1;
-		user_softwareIntr();
+		// user_softwareIntr();
 		// xil_printf("cpu0 = %d\r\n",test_int_4);
 		
 		if(uart_rx_ready)
@@ -177,7 +177,7 @@ int main(void)
 			// 	break;
 			// }
 			uart_rx_ready = 0;
-			// user_softwareIntr();
+			user_softwareIntr();
 
 		}
 

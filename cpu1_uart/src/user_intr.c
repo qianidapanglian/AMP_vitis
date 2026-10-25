@@ -89,4 +89,5 @@ void user_softwareIntr(void)
 static void soft_intr_handler(void *CallbackRef)
 {
 	xil_printf("This is CPU1, Soft Interrupt from CPU0\r\n");
+	user_softwareIntr();
 }
