@@ -109,3 +109,15 @@ void user_data_filedwithDC(u32* baseaddr,u32 length_u32,u32 data_filled)
 	}
 	Xil_DCacheFlushRange(baseaddr,length_u32 * sizeof(u32));
 }
+
+/**
+ * 用于测试断点设置，局部变量修改
+ */
+void test_xsct_print(void)
+{
+	int test_local = 1;
+	// xil_printf("first con\r\n");
+
+	xil_printf("test_local = %d\r\n",test_local);
+
+}

@@ -144,42 +144,49 @@ int main(void)
 	 * 等待 TX 完成与 RX 完成
 	 */
 	while(1) {
+		usleep(600000);
+		test_int_4 += 1;
+		xil_printf("cpu0 = %d\r\n",test_int_4);
+		test_xsct_print();
 		
-		if(uart_rx_ready){
-			switch (uart_rx_select)
-			{
-				//单次发送，并且改变发射缓冲区的数据。
-			case SELECT_DMA0_TX:
-				 Status = user_dma_sg_Txtransfer(XPAR_AXI_DMA_0_DEVICE_ID);
-				 usleep(1000);
-				 Xil_DCacheFlushRange(RX_BUFFER_BASE_0,RX_PKT_LEN_0 * NUMBER_OF_BDS_TO_TRANSFER);
-				 // user_data_process(TX_BUFFER_BASE_0,TX_PKT_LEN_0 * NUMBER_OF_BDS_TO_TRANSFER/sizeof(u32));
-				 user_data_filedwithDC(TX_BUFFER_BASE_0,
-				 	TX_PKT_LEN_0 * NUMBER_OF_BDS_TO_TRANSFER/sizeof(u32),cycle_varie40_120);
-				 cycle_varie40_120 = (cycle_varie40_120 == 120) ? 40 : (cycle_varie40_120 + 40);
-				break;
+		// if(uart_rx_ready){
+		// 	switch (uart_rx_select)
+		// 	{
+		// 		//单次发送，并且改变发射缓冲区的数据。
+		// 	case SELECT_DMA0_TX:
+		// 		 Status = user_dma_sg_Txtransfer(XPAR_AXI_DMA_0_DEVICE_ID);
+		// 		 usleep(1000);
+		// 		 Xil_DCacheFlushRange(RX_BUFFER_BASE_0,RX_PKT_LEN_0 * NUMBER_OF_BDS_TO_TRANSFER);
+		// 		 // user_data_process(TX_BUFFER_BASE_0,TX_PKT_LEN_0 * NUMBER_OF_BDS_TO_TRANSFER/sizeof(u32));
+		// 		 user_data_filedwithDC(TX_BUFFER_BASE_0,
+		// 		 	TX_PKT_LEN_0 * NUMBER_OF_BDS_TO_TRANSFER/sizeof(u32),cycle_varie40_120);
+		// 		 cycle_varie40_120 = (cycle_varie40_120 == 120) ? 40 : (cycle_varie40_120 + 40);
+		// 		break;
 
-			case SELECT_DMA0_RX:
-				 Status = user_dma_sg_Rxtransfer(XPAR_AXI_DMA_0_DEVICE_ID);
-				 Xil_DCacheFlushRange(RX_BUFFER_BASE_0,RX_PKT_LEN_0 * NUMBER_OF_BDS_TO_TRANSFER);
-				break;
+		// 	case SELECT_DMA0_RX:
+		// 		 Status = user_dma_sg_Rxtransfer(XPAR_AXI_DMA_0_DEVICE_ID);
+		// 		 Xil_DCacheFlushRange(RX_BUFFER_BASE_0,RX_PKT_LEN_0 * NUMBER_OF_BDS_TO_TRANSFER);
+		// 		break;
 
 
-			case SELECT_DMA1_TX:
-				 Status = user_dma_sg_Txtransfer(XPAR_AXI_DMA_1_DEVICE_ID);
-				break;
+		// 	case SELECT_DMA1_TX:
+		// 		 Status = user_dma_sg_Txtransfer(XPAR_AXI_DMA_1_DEVICE_ID);
+		// 		break;
 
 			
 
-			case SELECT_UART_DTSD:
-				 user_printf_u32(RX_BUFFER_BASE_0,RX_PKT_LEN_0 * NUMBER_OF_BDS_TO_TRANSFER/sizeof(u32));
-				break;
+		// 	case SELECT_UART_DTSD:
+		// 		 user_printf_u32(RX_BUFFER_BASE_0,RX_PKT_LEN_0 * NUMBER_OF_BDS_TO_TRANSFER/sizeof(u32));
+		// 		break;
 
-			default:
-				break;
-			}
-			uart_rx_ready = 0;
-		}
+		// 	default:
+		// 		break;
+		// 	}
+		// 	uart_rx_ready = 0;
+		// }
+
+
+		
 		// usleep(1000);
 	}
 

@@ -21,6 +21,7 @@
 #include "platform.h"
 #include "xil_printf.h"
 #include "sleep.h"
+#include "user.h"
 
 int main()
 {
@@ -32,7 +33,8 @@ int main()
     while(1)
     {
         usleep(1000000);
-        printf("cpu1 is working\r\n");
+        printf("cpu1\r\n");
+        test_xsct_print();
     }
     cleanup_platform();
     return 0;
