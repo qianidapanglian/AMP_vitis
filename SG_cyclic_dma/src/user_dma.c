@@ -1096,11 +1096,7 @@ int user_itr_init()
 		return XST_FAILURE;
 	}
 
-    //对每个外设进行配置（可调换顺序）
-    dma_intr_config(&Intc,&Dmaintr_cfg_0);
-    dma_intr_config(&Intc,&Dmaintr_cfg_1);
-	uart_intr_config(&Intc);
-	cpu0_intr_init(&Intc);
+
 
 #endif
 
@@ -1110,6 +1106,12 @@ int user_itr_init()
 			(Xil_ExceptionHandler)INTC_HANDLER,
 			(void *)&Intc);
 	Xil_ExceptionEnable();
+
+	    //对每个外设进行配置（可调换顺序）
+    dma_intr_config(&Intc,&Dmaintr_cfg_0);
+    dma_intr_config(&Intc,&Dmaintr_cfg_1);
+	uart_intr_config(&Intc);
+	cpu0_intr_init(&Intc);
 
 	// xil_printf("SetupIntrSystem_Success");
 	xil_printf("cpu0 SetupIntrSystem_Success\r\n");
@@ -1123,5 +1125,17 @@ int user_itr_init()
 void user_softwareIntr(void)
 {
 	XScuGic_SoftwareIntr(&Intc,SOFT_INTR_ID_TO_CPU1,CPU1_ID);
+}
+
+//"SEV"指令唤醒CPU1并跳转至相应的程序
+#define sev()                __asm__("sev")               //C语言内嵌汇编写法 send event指令
+
+
+void start_cpu1()
+{
+	//向 CPU1_COPY_ADDR(0Xffffffff0)地址写入 CPU1 的访问内存基地址
+	Xil_Out32(CPU1_COPY_ADDR, CPU1_START_ADDR);
+	dmb();  //等待内存写入完成(同步)
+	sev();  //通过"SEV"指令唤醒CPU1并跳转至相应的程序
 }
 

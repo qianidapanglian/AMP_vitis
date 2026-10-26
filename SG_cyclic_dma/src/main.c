@@ -139,6 +139,7 @@ int main(void)
 
 	// Rx_REG_0 = (UINTPTR)(RxRingPtr_test0->ChanBase);
 	user_tx_datainit();//Tx发送缓冲
+	start_cpu1();
 
 	/*
 	 * 等待 TX 完成与 RX 完成

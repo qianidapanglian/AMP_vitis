@@ -60,16 +60,14 @@ int user_itr_init(void)
 		return XST_FAILURE;
 	}
 
-    //可调换顺序
-	cpu1_intr_init(&Intc);
-
-
-
 	Xil_ExceptionInit();
 	Xil_ExceptionRegisterHandler(XIL_EXCEPTION_ID_INT,
 			(Xil_ExceptionHandler)INTC_HANDLER,
 			(void *)&Intc);
 	Xil_ExceptionEnable();
+
+	//可调换顺序
+	cpu1_intr_init(&Intc);
 
 	xil_printf("cpu1 SetupIntrSystem_Success\r\n");
 	return XST_SUCCESS;
