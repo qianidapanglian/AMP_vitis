@@ -22,3 +22,6 @@ RemoteSystemsTempFiles
 
 
 
+cpu1_uart/src/addr2func.txt
+cpu1_uart/src/cpu1_addr2func.txt
+SG_cyclic_dma/src/cpu0_addr2func.txt
