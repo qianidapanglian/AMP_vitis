@@ -115,6 +115,8 @@
 #define CPU1_ID              XSCUGIC_SPI_CPU1_MASK        //CPU1 ID
 #define SOFT_INTR_ID_TO_CPU0 0                            //软件中断号 0 ,范围：0~15
 #define SOFT_INTR_ID_TO_CPU1 1                            //软件中断号 1 ,范围：0~15
+
+#define SHARE_BASE           0xffff0000                   //共享OCM首地址
 #define CPU1_COPY_ADDR       0xfffffff0                   //存放CPU1应用起始地址的地址
 #define CPU1_START_ADDR      0x10000000                   //CPU1应用起始地址
 
@@ -231,7 +233,7 @@ void user_tx_datainit();
 int user_itr_init();
 void user_softwareIntr(void);
 void start_cpu1();
-
+void user_init_share(void);
 
 
 #endif /* USER_DMA_H */

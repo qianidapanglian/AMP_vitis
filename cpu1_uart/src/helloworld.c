@@ -25,19 +25,22 @@
 #include "user.h"
 #include "user_intr.h"
 
+int test1 = 0;
+
 int main()
 {
     init_platform();
     user_itr_init();
+    test1 = 1;
     
     print("Hello World\n\r");
     print("Successfully ran Hello World application");
+    test1 += 1;
     while(1)
     {
         usleep(1000000);
-        // user_softwareIntr();
-        // printf("cpu1\r\n");
-        // test_xsct_print();
+        test1 += 1;
+        // printf("cpu1,%d\r\n",test1);
     }
     cleanup_platform();
     return 0;

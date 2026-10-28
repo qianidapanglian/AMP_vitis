@@ -1139,3 +1139,11 @@ void start_cpu1()
 	sev();  //通过"SEV"指令唤醒CPU1并跳转至相应的程序
 }
 
+ /**
+  * 对共享内存禁用cache + 开启shareable
+  */
+void user_init_share(void)
+{
+	Xil_SetTlbAttributes(SHARE_BASE,0x14de2);    //禁用OCM的Cache属性
+	Xil_SetTlbAttributes(CPU1_COPY_ADDR,0x14de2);//禁用0xfffffff0的Cache属性
+}
