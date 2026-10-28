@@ -47,6 +47,7 @@ extern void xil_printf(const char *format, ...);
 
 #include "user_dma.h"
 #include "user.h"
+#include "user_share.h"
 /******************** Constant Definitions **********************************/
 /*
  * Device hardware build related constants.
