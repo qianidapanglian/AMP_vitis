@@ -31,6 +31,7 @@ int main()
 {
     init_platform();
     user_itr_init();
+    user_init_share();  //配置共享内存
     test1 = 1;
     
     print("Hello World\n\r");

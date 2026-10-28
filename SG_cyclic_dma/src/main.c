@@ -105,7 +105,7 @@ int main(void)
 
 	int Status;
 	XAxiDma_Config *Config;
-	
+	u8 share_u8 = 0;
 	
 	TxRingPtr_test0 = XAxiDma_GetTxRing(&AxiDma0);
 	TxRingPtr_test1 = XAxiDma_GetTxRing(&AxiDma1);
@@ -183,7 +183,9 @@ int main(void)
 			// 	break;
 			// }
 			uart_rx_ready = 0;
-			user_softwareIntr();
+			share_u8 += 1;
+			Xil_Out8(SHARE_BASE,share_u8);
+			user_softwareIntr();	//发送软中断到cpu1
 
 		}
 

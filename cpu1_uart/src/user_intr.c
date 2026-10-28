@@ -86,6 +86,14 @@ void user_softwareIntr(void)
  */
 static void soft_intr_handler(void *CallbackRef)
 {
+	u8 share_u8 = 0;
+	share_u8 = Xil_In8(SHARE_BASE);
 	xil_printf("This is CPU1, Soft Interrupt from CPU0\r\n");
-	user_softwareIntr();
+	xil_printf("get share_u8:%d\r\n",share_u8);
+	user_softwareIntr();	//给cpu0发软中断
+}
+
+void user_init_share(void)
+{
+	Xil_SetTlbAttributes(SHARE_BASE,0x14de2);    //禁用OCM的Cache属性
 }
