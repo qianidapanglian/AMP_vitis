@@ -102,8 +102,7 @@ user_XAxiDma_Bd* BD_test_2;//测试BD指针
 ******************************************************************************/
 int main(void)
 {
-	user_init_share();
-	start_cpu1();
+
 	int Status;
 	XAxiDma_Config *Config;
 	
@@ -142,6 +141,10 @@ int main(void)
 	// Rx_REG_0 = (UINTPTR)(RxRingPtr_test0->ChanBase);
 	user_tx_datainit();//Tx发送缓冲
 
+	//过一段时间启动cpu1.
+	usleep(2000);
+	user_init_share();
+	start_cpu1();
 	
 
 	/*

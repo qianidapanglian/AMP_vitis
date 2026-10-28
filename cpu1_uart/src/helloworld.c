@@ -34,7 +34,7 @@ int main()
     test1 = 1;
     
     print("Hello World\n\r");
-    print("Successfully ran Hello World application");
+
     test1 += 1;
     while(1)
     {
